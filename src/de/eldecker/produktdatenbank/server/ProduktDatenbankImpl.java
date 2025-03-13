@@ -2,7 +2,6 @@ package de.eldecker.produktdatenbank.server;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import de.eldecker.produktdatenbank.model.ProduktRecord;
 
@@ -73,13 +72,11 @@ public class ProduktDatenbankImpl {
 	 *
 	 * @param produktnummer Produktnummer (positive Zahl)
 	 *
-	 * @return Optional mit Produkt wenn gefunden, sonst leeres Optional
+	 * @return Produkt wenn gefunden, sonst {@code null}
 	 */
-	public Optional<ProduktRecord> holeProdukt( int produktnummer ) {
+	public ProduktRecord holeProdukt( int produktnummer ) {
 
-		final ProduktRecord produkt = _map.get( produktnummer ); // ist null, wenn nicht gefunden!
-
-		return Optional.ofNullable( produkt );
+		return _map.get( produktnummer );
 	}
 
 }
