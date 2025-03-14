@@ -14,6 +14,10 @@ public class ProduktdatenClient {
 		System.out.println();
 		
 		final Registry registry = LocateRegistry.getRegistry();
+		
+		// TODO Entferntes Objekt holen und Produkt mit Nr=222 abfragen
 	}
 	
 }
+
+
