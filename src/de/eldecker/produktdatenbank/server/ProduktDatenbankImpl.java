@@ -5,18 +5,18 @@ import java.util.Map;
 
 import de.eldecker.produktdatenbank.model.ProduktRecord;
 
-
 /**
- * Das Objekt simuliert eine Datenbank für den Zugriff auf Produktdaten. 
+ * Das Objekt simuliert eine Datenbank für den Zugriff auf Produktdaten.
  */
-public class ProduktDatenbankImpl {
+public class ProduktDatenbankImpl implements ProduktDatenbank {
 
 	/** Dummy-Preis (negativ), um nicht lieferbares Produkte zu markieren. */
 	private static final double PREIS_NICHT_VERFÜGBAR = -1.0;
 
-	/** Eigentliche "Datenbank": Bildet die Produktnummer auf ein Produkt-Objekt ab. */
-	private Map<Integer,ProduktRecord> _map = new HashMap<>();
-
+	/**
+	 * Eigentliche "Datenbank": Bildet die Produktnummer auf ein Produkt-Objekt ab.
+	 */
+	private Map<Integer, ProduktRecord> _map = new HashMap<>();
 
 	/**
 	 * Konstruktor, füllt "Datenbank".
@@ -24,36 +24,31 @@ public class ProduktDatenbankImpl {
 	public ProduktDatenbankImpl() {
 
 		hinzufuegen(
-			new ProduktRecord( 111,
-	                           "Lufthaken",
-	                           "10er-Pack der bewährten Lufthaken von Siemens",
-	                           99.99 )
-		);
+				new ProduktRecord(111,
+						"Lufthaken",
+						"10er-Pack der bewährten Lufthaken von Siemens",
+						99.99));
 
 		hinzufuegen(
-			new ProduktRecord( 222,
-                			   "Getriebesand",
-                			   "Feinkörnig, im 10kg Sack",
-                			   5.49 )
-		);
+				new ProduktRecord(222,
+						"Getriebesand",
+						"Feinkörnig, im 10kg Sack",
+						5.49));
 
 		hinzufuegen(
-			new ProduktRecord( 333,
-                			   "Feierabendschablone",
-                			   "Unverzichtbares Utensil für jede Behörde",
-                			   9.95 )
-		);
+				new ProduktRecord(333,
+						"Feierabendschablone",
+						"Unverzichtbares Utensil für jede Behörde",
+						9.95));
 
 		hinzufuegen(
-			new ProduktRecord( 444,
-                			   "Luftgitarre",
-                			   "Hochwertiges Instrument mit klassischer Single-Cut-Bauform",
-                			   PREIS_NICHT_VERFÜGBAR )
-		);
+				new ProduktRecord(444,
+						"Luftgitarre",
+						"Hochwertiges Instrument mit klassischer Single-Cut-Bauform",
+						PREIS_NICHT_VERFÜGBAR));
 
-		System.out.println( "Anzahl Produkte in Datenbank geladen: " + _map.size() );
+		System.out.println("Anzahl Produkte in Datenbank geladen: " + _map.size());
 	}
-
 
 	/**
 	 * Fügt {@code produkt} unter der enthaltenen Produktnummer in der "Datenbank"
@@ -61,11 +56,10 @@ public class ProduktDatenbankImpl {
 	 *
 	 * @param produkt Hinzuzufügendes Produkt
 	 */
-	private void hinzufuegen( ProduktRecord produkt ) {
+	private void hinzufuegen(ProduktRecord produkt) {
 
-		_map.put( produkt.produktNummer(), produkt );
+		_map.put(produkt.produktNummer(), produkt);
 	}
-
 
 	/**
 	 * Produkt anhand {@code produktnummer} in "Datenbank" suchen.
@@ -74,9 +68,11 @@ public class ProduktDatenbankImpl {
 	 *
 	 * @return Produkt wenn gefunden, sonst {@code null}
 	 */
-	public ProduktRecord holeProdukt( int produktnummer ) {
-
-		return _map.get( produktnummer );
+	@Override
+	public ProduktRecord holeProdukt(int produktnummer) {
+		ProduktRecord product = _map.get(produktnummer);
+		System.out.printf("got: %s\n", product.toString());
+		return product;
 	}
 
 }
